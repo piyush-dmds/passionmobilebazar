@@ -1,0 +1,2738 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM BAZA₹ - स्पिनर डिस्काउंट & टाइमर</title>
+    <style>
+        :root {
+            --neon: #66fcf1;
+            --orange: #ff7a00;
+            --dark: #0b0c10;
+            --card: #161b22;
+            --gold: #FFD700;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            overflow-x: hidden;
+            user-select: none;
+        }
+
+        /* --- AUTH SECTION --- */
+        #auth-section {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .auth-card {
+            width: 90%;
+            max-width: 400px;
+            background: var(--card);
+            border: 1px solid #30363d;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+            position: relative;
+            text-align: center;
+        }
+
+        .auth-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, #ff0000, #ff7a00, #ffea00, #00ff00, #00ffff, #0000ff, #8b00ff);
+            background-size: 200% auto;
+            animation: rainbowMove 30s linear infinite;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .logo-main {
+            font-size: 45px;
+            font-weight: 900;
+            background: linear-gradient(to right, #ef5350, #f48fb1, #7e57c2, #2196f3, #26c6da, #43a047, #eeff41, #f9a825, #ff5722);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 500% auto;
+            animation: rainbowMove 11s linear infinite;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            cursor: pointer;
+        }
+
+        @keyframes rainbowMove {
+            to {
+                background-position: 500% center;
+            }
+        }
+
+        .sub-text {
+            color: var(--orange);
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        .auth-input {
+            width: 100%;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1.5px solid #30363d;
+            background: #0d1117;
+            color: #fff;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 900;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        /* --- WEBSITE CONTENT --- */
+        #main-website {
+            display: none;
+            padding-bottom: 80px;
+        }
+
+        .header {
+            padding: 12px 15px;
+            background: #111;
+            border-bottom: 2px solid var(--orange);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .header-btn {
+            background: var(--orange);
+            color: black;
+            padding: 5px 12px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .header-btn.whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .header-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- मार्की --- */
+        .marquee-container {
+            background: #ff0000;
+            padding: 8px 0;
+            margin: 5px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            display: block;
+            width: 100%;
+        }
+
+        .marquee-text {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 30s linear infinite;
+            color: white;
+            font-weight: bold;
+            font-size: 17px;
+            white-space: nowrap;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        /* --- स्लाइडर --- */
+        .slider-box {
+            width: 100%;
+            height: 200px;
+            background: #000;
+            overflow: hidden;
+            position: relative;
+            border-radius: 16px;
+            margin: 10px 0;
+        }
+
+        #advTrack {
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 100%;
+        }
+
+        .adv-img {
+            min-width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (min-width: 768px) {
+            .slider-box {
+                height: 320px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .slider-box {
+                height: 420px;
+            }
+        }
+
+        /* --- मुख्य बटन सेक्शन --- */
+        .main-buttons-row {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 10px 15px;
+        }
+
+        .button-row {
+            display: flex;
+            gap: 8px;
+            justify-content: space-between;
+        }
+
+        .button-row .btn-item {
+            flex: 1;
+            background: #333;
+            border: 1px solid var(--orange);
+            border-radius: 12px;
+            padding: 15px 0;
+            font-weight: 900;
+            font-size: 16px;
+            cursor: pointer;
+            color: white;
+            text-align: center;
+            transition: 0.2s;
+        }
+
+        .button-row .btn-item.jio {
+            background: #0a58ff;
+        }
+
+        .button-row .btn-item.airtel {
+            background: #e60000;
+        }
+
+        .button-row .btn-item.bsnl {
+            background: #ff7a00;
+        }
+
+        .button-row .btn-item.coupon {
+            background: linear-gradient(135deg, #ff00ff, #ff1493);
+        }
+
+        .button-row .btn-item.spin {
+            background: linear-gradient(135deg, #ffcc00, #ff9900);
+            color: #000;
+        }
+
+        .button-row .btn-item.wallet {
+            background: linear-gradient(135deg, #00c853, #009624);
+            color: white;
+        }
+
+        .button-row .btn-item:hover {
+            transform: scale(1.02);
+            border-color: white;
+        }
+
+        .timer-box {
+            background: #1e1e1e;
+            border: 1px solid var(--orange);
+            border-radius: 10px;
+            padding: 8px 15px;
+            margin: 0 15px 10px 15px;
+            font-size: 14px;
+            color: var(--neon);
+            font-weight: bold;
+        }
+
+        /* --- कंपनी फ़िल्टर बटन --- */
+        .company-row {
+            display: flex;
+            overflow-x: auto;
+            white-space: nowrap;
+            gap: 8px;
+            padding: 5px 0;
+            scrollbar-width: thin;
+            -webkit-overflow-scrolling: touch;
+            justify-content: center;
+        }
+
+        .company-btn {
+            background: linear-gradient(145deg, #ff0000, #ff7a00, #ffea00, #00ff00, #00ffff, #0000ff, #8b00ff);
+            background-size: 300% 300%;
+            animation: rainbowMoveBtn 5s ease infinite;
+            border: none;
+            border-radius: 50px;
+            padding: 8px 16px;
+            font-weight: 900;
+            font-size: 13px;
+            color: #000;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            transition: 0.2s;
+            flex: 0 0 auto;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .company-btn:hover {
+            transform: scale(1.02);
+        }
+
+        @keyframes rainbowMoveBtn {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* --- मोबाइल फ़िल्टर बार --- */
+        .mobile-filter-bar {
+            background: #111;
+            border-bottom: 2px solid var(--orange);
+            padding: 10px;
+            display: none;
+            align-items: center;
+            overflow-x: auto;
+            white-space: nowrap;
+            gap: 8px;
+            position: sticky;
+            top: 60px;
+            z-index: 900;
+        }
+
+        .filter-back-btn {
+            background: var(--orange);
+            color: black;
+            border: none;
+            border-radius: 20px;
+            padding: 5px 15px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .filter-company-btn {
+            background: linear-gradient(145deg, #ff0000, #ff7a00, #ffea00, #00ff00, #00ffff, #0000ff, #8b00ff);
+            background-size: 300% 300%;
+            animation: rainbowMoveBtn 5s ease infinite;
+            border: none;
+            border-radius: 50px;
+            padding: 8px 16px;
+            font-weight: 900;
+            font-size: 13px;
+            color: #000;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            transition: 0.2s;
+            flex: 0 0 auto;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .filter-company-btn.active {
+            border: 2px solid white;
+            box-shadow: 0 0 10px white;
+        }
+
+        /* --- स्टॉक स्लाइडर और सर्च --- */
+        .stock-section {
+            background: #000;
+            font-family: 'Segoe UI', sans-serif;
+            color: #fff;
+            padding: 10px;
+            border-radius: 15px;
+            margin: 15px 0;
+        }
+
+        .live-stock-section {
+            background: #080808;
+            padding: 25px 0;
+            border-top: 2px solid #ffd700;
+            border-bottom: 2px solid #ffd700;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+
+        .live-badge {
+            background: #ffd700;
+            color: #000;
+            padding: 2px 10px;
+            font-weight: 900;
+            font-size: 11px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            border-bottom-right-radius: 8px;
+            letter-spacing: 1px;
+        }
+
+        .stock-wrapper {
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+            white-space: nowrap;
+        }
+
+        .stock-slide {
+            min-width: 100%;
+            text-align: center;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .stock-company {
+            color: #fff;
+            font-size: 18px;
+            letter-spacing: 1px;
+        }
+
+        .stock-model {
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .stock-price {
+            color: #ff4d94;
+            font-weight: 900;
+            font-size: 24px;
+            margin-top: 5px;
+        }
+
+        .loader-text {
+            padding: 20px;
+            color: #ffd700;
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .search-container {
+            padding: 5px 15px 15px;
+            text-align: center;
+        }
+
+        .search-wrapper {
+            position: relative;
+            max-width: 400px;
+            margin: auto;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 50px;
+            border: 2px solid #ffd700;
+            background: #111;
+            color: #fff;
+            outline: none;
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 3px;
+            top: 3px;
+            bottom: 3px;
+            background: linear-gradient(45deg, #ff4d94, #ff0000);
+            color: #fff;
+            border: none;
+            border-radius: 40px;
+            padding: 0 15px;
+            font-weight: 900;
+            cursor: pointer;
+        }
+
+        /* --- प्रोडक्ट ग्रिड --- */
+        .prod-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            padding: 12px;
+        }
+
+        .product-card {
+            background: var(--card);
+            padding: 10px;
+            border-radius: 12px;
+            border: 1px solid #333;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            border-color: var(--orange);
+            transform: translateY(-2px);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 100px;
+            object-fit: contain;
+            background: #fff;
+            border-radius: 8px;
+        }
+
+        .product-card p {
+            font-size: 11px;
+            margin: 5px 0;
+            color: #ddd;
+        }
+
+        .product-card b {
+            color: var(--neon);
+        }
+
+        /* --- प्रोडक्ट डिटेल पॉपअप --- */
+        .detail-popup {
+            background: #1a1a1a;
+            border: 2px solid var(--orange);
+            border-radius: 20px;
+            padding: 20px;
+            max-width: 350px;
+            width: 90%;
+            color: white;
+            max-height: 80vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .detail-popup img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: contain;
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .detail-popup .detail-row {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin: 8px 0;
+            padding: 5px;
+            background: #0d1117;
+            border-radius: 5px;
+        }
+
+        .detail-popup .detail-label {
+            color: var(--neon);
+            font-weight: bold;
+        }
+
+        .detail-popup .detail-value {
+            color: white;
+            text-align: right;
+        }
+
+        /* --- इमेज पॉपअप --- */
+        #imagePopup .popup-box {
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            text-align: center;
+        }
+
+        #fullImage {
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 10px;
+            border: 2px solid white;
+        }
+
+        /* --- ऑर्डर कार्ड --- */
+        .order-card {
+            margin: 12px;
+            padding: 15px;
+            border-radius: 15px;
+            text-align: left;
+            background: var(--card);
+            border-left: 8px solid #555;
+            font-weight: bold;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            transition: 0.2s;
+        }
+
+        .order-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 122, 0, 0.2);
+        }
+
+        .order-id {
+            font-size: 12px;
+            color: var(--neon);
+            margin-bottom: 5px;
+            font-family: monospace;
+        }
+
+        .status-badge {
+            float: right;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .st-confirm {
+            border-left-color: #28a745;
+            background: rgba(40, 167, 69, 0.1);
+        }
+
+        .st-confirm .status-badge {
+            background: #28a745;
+            color: white;
+        }
+
+        .st-wait {
+            border-left-color: #ffc107;
+            background: rgba(255, 193, 7, 0.1);
+        }
+
+        .st-wait .status-badge {
+            background: #ffc107;
+            color: black;
+        }
+
+        .st-failed {
+            border-left-color: #dc3545;
+            background: rgba(220, 53, 69, 0.1);
+        }
+
+        .st-failed .status-badge {
+            background: #dc3545;
+            color: white;
+        }
+
+        .st-delivered {
+            border-left-color: #17a2b8;
+            background: rgba(23, 162, 184, 0.1);
+        }
+
+        .st-delivered .status-badge {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .st-pending {
+            border-left-color: #6c757d;
+            background: rgba(108, 117, 125, 0.1);
+        }
+
+        .st-pending .status-badge {
+            background: #6c757d;
+            color: white;
+        }
+
+        .st-processing {
+            border-left-color: #fd7e14;
+            background: rgba(253, 126, 20, 0.1);
+        }
+
+        .st-processing .status-badge {
+            background: #fd7e14;
+            color: white;
+        }
+
+        .btn {
+            padding: 14px;
+            background: var(--orange);
+            color: black;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            width: 90%;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+
+        .loader {
+            display: none;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--orange);
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            animation: spin 1s linear infinite;
+            margin: 10px auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(8px);
+        }
+
+        .popup-box {
+            width: 90%;
+            max-width: 380px;
+            background: #1a1a1a;
+            border: 2px solid var(--orange);
+            border-radius: 20px;
+            padding: 20px;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        /* स्पिन मोडल */
+        .spinner-area {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            margin: 20px auto;
+        }
+
+        .wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(255, 122, 0, 0.6);
+            transition: transform 8s cubic-bezier(0.1, 0, 0, 1);
+            background: #333;
+        }
+
+        .arrow {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 50px;
+            color: #ff7a00;
+            text-shadow: 0 0 15px black;
+            z-index: 100;
+            filter: drop-shadow(0 0 5px orange);
+        }
+
+        .center-dot {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background: #0b0c10;
+            border: 3px solid #ff7a00;
+            border-radius: 50%;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            color: white;
+            box-shadow: 0 0 15px rgba(255, 122, 0, 0.8);
+        }
+
+        .spin-button {
+            background: #ff7a00;
+            border: none;
+            color: black;
+            font-weight: 900;
+            font-size: 24px;
+            padding: 15px 30px;
+            border-radius: 60px;
+            width: 100%;
+            max-width: 300px;
+            margin: 20px auto;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #b35700;
+            transition: 0.1s;
+            text-transform: uppercase;
+        }
+
+        .spin-button:active {
+            transform: translateY(6px);
+            box-shadow: none;
+        }
+
+        .spin-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .result-box {
+            background: #0d1117;
+            border: 2px solid #ff7a00;
+            border-radius: 20px;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 18px;
+            font-weight: bold;
+            min-height: 60px;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: #111;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            border-top: 2px solid var(--orange);
+            z-index: 2000;
+        }
+
+        .nav-item {
+            color: #aaa;
+            font-size: 12px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .nav-item.active {
+            color: var(--orange);
+        }
+
+        .page-section {
+            display: none;
+            padding: 10px;
+            animation: fadeIn 0.3s;
+        }
+
+        .active-section {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .forgot-pin {
+            color: var(--neon);
+            cursor: pointer;
+            margin-top: 15px;
+            font-size: 14px;
+            text-decoration: underline;
+        }
+
+        /* वैलिडेशन स्टाइल */
+        .validation-error {
+            color: #ff6666;
+            font-size: 12px;
+            margin-top: -5px;
+            margin-bottom: 5px;
+            display: none;
+        }
+
+        .invalid-input {
+            border: 2px solid #ff6666 !important;
+        }
+
+        /* डीबग पैनल */
+        .debug-panel {
+            position: fixed;
+            bottom: 70px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.95);
+            border: 2px solid #ff7a00;
+            border-radius: 10px;
+            padding: 10px;
+            max-width: 320px;
+            max-height: 400px;
+            overflow: auto;
+            color: #0f0;
+            font-size: 12px;
+            font-family: monospace;
+            z-index: 10000;
+            display: none;
+            text-align: left;
+            box-shadow: 0 0 20px rgba(255, 122, 0, 0.3);
+            user-select: text;
+            -webkit-user-select: text;
+        }
+
+        .debug-panel.show {
+            display: block;
+        }
+
+        .debug-header {
+            color: #ff7a00;
+            font-weight: bold;
+            margin-bottom: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .debug-item {
+            border-bottom: 1px solid #333;
+            padding: 3px 0;
+            word-break: break-word;
+        }
+
+        .debug-error {
+            color: #ff6666;
+        }
+
+        .debug-warning {
+            color: #ffff66;
+        }
+
+        .debug-success {
+            color: #66ff66;
+        }
+
+        /* ===== नए स्क्रैच कूपन स्टाइल ===== */
+        .coupon-header {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .coupon-header h2 {
+            color: var(--gold);
+            margin: 0;
+        }
+
+        .coupon-header p {
+            font-size: 14px;
+            opacity: 0.8;
+            margin: 5px 0;
+        }
+
+        .coupon-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 5px;
+            width: 100%;
+            max-width: 360px;
+            margin: 0 auto;
+        }
+
+        .scratch-box {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1.45 / 1;
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 2px solid #333;
+        }
+
+        .reward-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #222;
+            font-weight: bold;
+            text-align: center;
+            font-size: 16px;
+            pointer-events: none;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            touch-action: none;
+            cursor: crosshair;
+        }
+
+        .hidden {
+            opacity: 0;
+            transform: scale(0.5);
+            pointer-events: none;
+        }
+
+        .focused {
+            transform: scale(1.05);
+            z-index: 10;
+            border-color: var(--gold);
+        }
+
+        #couponStatus {
+            margin-top: 10px;
+            color: var(--gold);
+            font-weight: bold;
+            height: 25px;
+            font-size: 14px;
+        }
+
+        .claim-btn {
+            display: none;
+            margin: 15px auto 0;
+            background: #25D366;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            animation: pop 0.3s ease;
+            width: fit-content;
+            border: none;
+            cursor: pointer;
+        }
+
+        @keyframes pop {
+            from {
+                transform: scale(0.5);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- डीबग पैनल (कॉपी बटन के साथ) -->
+    <div id="debugPanel" class="debug-panel">
+        <div class="debug-header" onclick="toggleDebug()">🐞 DEBUG INFO (बंद करने के लिए क्लिक करें)</div>
+        <div id="debugContent">लोड हो रहा...</div>
+        <button onclick="copyDebugInfo()"
+            style="margin-top:10px; background:#ff7a00; color:black; border:none; border-radius:5px; padding:5px 10px; width:100%; font-weight:bold; cursor:pointer;">📋
+            कॉपी करें</button>
+    </div>
+
+    <!-- AUTH SECTION (शुरू में छिपा हुआ) -->
+    <div id="auth-section">
+        <div class="auth-card">
+            <div class="logo-main" id="logoDebug">PM BAZA₹</div>
+            <div id="loginBox">
+                <div class="sub-text">लॉगिन करें</div>
+                <input type="tel" id="l-mob" class="auth-input" placeholder="मोबाइल नंबर" maxlength="10"
+                    oninput="validateMobile(this, 'login')">
+                <div id="l-mob-error" class="validation-error">मोबाइल नंबर 6,7,8,9 से शुरू होना चाहिए (10 अंक)</div>
+                <input type="password" id="l-pin" class="auth-input" placeholder="6-अंकों का PIN" maxlength="6">
+                <div id="l-loader" class="loader"></div>
+                <button class="btn" id="loginBtn" onclick="doLogin()" disabled>SIGN IN</button>
+                <div class="forgot-pin" onclick="showForgotPin()">पिन भूल गए? यहाँ क्लिक करें</div>
+                <p onclick="switchAuth(true)"
+                    style="color:var(--orange); cursor:pointer; margin-top:20px; font-weight:bold;">नया अकाउंट बनाएँ</p>
+            </div>
+            <div id="regBox" style="display:none;">
+                <div class="sub-text">रजिस्ट्रेशन</div>
+                <input type="text" id="r-name" class="auth-input" placeholder="पूरा नाम" style="font-size:16px;"
+                    oninput="genID()">
+                <input type="tel" id="r-mob" class="auth-input" placeholder="मोबाइल नंबर" maxlength="10"
+                    oninput="validateMobile(this, 'register')">
+                <div id="r-mob-error" class="validation-error">मोबाइल नंबर 6,7,8,9 से शुरू होना चाहिए (10 अंक)</div>
+                <input type="password" id="r-pin" class="auth-input" placeholder="6-अंकों का PIN" maxlength="6">
+                <input type="tel" id="r-aadhar" class="auth-input" placeholder="आधार अंतिम 4 अंक" maxlength="4"
+                    oninput="genID()">
+                <input type="text" id="r-coupon" class="auth-input" placeholder="कूपन या रेफरल ID"
+                    style="font-size:16px; border-color:var(--neon);">
+                <div id="refID-view" style="color:var(--neon); font-weight:900; margin:5px 0;">Your ID: PM----</div>
+                <div id="r-loader" class="loader"></div>
+                <button class="btn" id="registerBtn" onclick="doRegister()" disabled>CREATE ACCOUNT</button>
+                <p onclick="switchAuth(false)"
+                    style="color:var(--orange); cursor:pointer; margin-top:20px; font-weight:bold;">लॉगिन पर वापस जाएं
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN WEBSITE -->
+    <div id="main-website">
+        <div class="header">
+            <div class="logo-main" style="font-size:22px; margin-bottom:0;">PM BAZA₹</div>
+            <div class="header-buttons">
+                <a href="tel:7677744450" class="header-btn">📞 Call</a>
+                <a href="https://wa.me/7677744450?text=I%20am%20visit%20your%20website" target="_blank"
+                    class="header-btn whatsapp">💬 WhatsApp</a>
+            </div>
+            <div id="top-user-name" style="font-size:12px; color:var(--orange);">...</div>
+        </div>
+
+        <!-- मोबाइल फ़िल्टर बार -->
+        <div id="mobileFilterBar" class="mobile-filter-bar">
+            <button class="filter-back-btn" onclick="hideFilterBar()">← वापस</button>
+            <div id="filterCompanyButtons" class="filter-company-row"></div>
+        </div>
+
+        <!-- होम पेज -->
+        <div id="homePage" class="page-section active-section">
+            <div class="home-content" id="homeContent">
+                <div class="marquee-container">
+                    <div id="marqueeMessage" class="marquee-text">लोड हो रहा है...</div>
+                </div>
+                <div class="slider-box" id="sliderBox">
+                    <div id="advTrack"></div>
+                </div>
+
+                <!-- बटन पंक्तियाँ -->
+                <div class="main-buttons-row">
+                    <div class="button-row">
+                        <div class="btn-item jio" onclick="openRech('JIO')">👉 ⌛ JIO</div>
+                        <div class="btn-item airtel" onclick="openRech('AIRTEL')">👉 🔋 AIRTEL</div>
+                        <div class="btn-item bsnl" onclick="openRech('BSNL')">👉 📱 BSNL</div>
+                    </div>
+                    <div class="button-row">
+                        <div class="btn-item coupon" onclick="openCouponModal()">🎟️ STORE VISIT</div>
+                        <div class="btn-item spin" onclick="openSpinModal()">🎡 LUCKY SPIN <span id="spinPoints"
+                                style="background: rgba(0,0,0,0.2); padding: 2px 8px; border-radius: 20px; margin-left:5px;">₹0</span>
+                        </div>
+                        <div class="btn-item wallet" onclick="showWallet()">💰 वॉलेट <span id="walletBalance"
+                                style="background: rgba(0,0,0,0.2); padding: 2px 8px; border-radius: 20px; margin-left:5px;">₹0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="timerDisplay" class="timer-box" style="display: none;">अगला मौका: -- घंटे -- मिनट में</div>
+
+                <!-- स्टॉक स्लाइडर और सर्च सेक्शन (स्लाइडर ऊपर, सर्च नीचे) -->
+                <div class="stock-section">
+                    <div class="live-stock-section">
+                        <div class="live-badge">LIVE OFFERS 🔥</div>
+                        <div id="stockWrapper" class="stock-wrapper">
+                            <div id="loaderText" class="loader-text">Passion Mobile BAZA₹: स्टॉक अपडेट हो रहा है...
+                            </div>
+                        </div>
+                    </div>
+                    <div class="search-container">
+                        <div class="search-wrapper">
+                            <input type="text" id="userInput" class="search-input"
+                                placeholder="मॉडल सर्च करें (जैसे: Vivo, iPhone)...">
+                            <button class="search-btn" onclick="searchStock()">खोजें</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- मोबाइल कंपनी बटन -->
+                <div class="bordered-section">
+                    <div style="font-size: 14px; color: var(--neon); margin-bottom: 10px; text-align: left;">📱 मोबाइल
+                        कंपनी</div>
+                    <div id="companyButtons" class="company-row"></div>
+                </div>
+            </div>
+            <div id="prodGrid" class="prod-grid"></div>
+        </div>
+
+        <!-- प्रोडक्ट डिटेल पॉपअप -->
+        <div class="overlay" id="productDetailPopup" onclick="closeOverlay('productDetailPopup')">
+            <div class="detail-popup" id="productDetailContent" onclick="event.stopPropagation()"></div>
+        </div>
+
+        <!-- इमेज पॉपअप -->
+        <div class="overlay" id="imagePopup" onclick="closeImagePopup()">
+            <div class="popup-box" onclick="event.stopPropagation()">
+                <img id="fullImage" src=""
+                    style="max-width: 90vw; max-height: 90vh; border-radius: 10px; border: 2px solid white;">
+                <button class="btn" style="background:#333; color:white; margin-top:10px;"
+                    onclick="closeImagePopup()">बंद करें</button>
+            </div>
+        </div>
+
+        <!-- पेमेंट QR पॉपअप -->
+        <div class="overlay" id="paymentQrPopup" onclick="closeOverlay('paymentQrPopup')">
+            <div class="popup-box" id="paymentQrContent" onclick="event.stopPropagation()"></div>
+        </div>
+
+        <!-- ===== नया कूपन मोडल (स्क्रैच कार्ड) ===== -->
+        <div class="overlay" id="couponModal" onclick="closeCouponModal()">
+            <div class="popup-box" onclick="event.stopPropagation()">
+                <div class="coupon-header">
+                    <h2>🎟️ स्टोर विजिट कूपन</h2>
+                    <p>किसी एक कार्ड को पूरा खुरचें!</p>
+                </div>
+                <div id="couponTimer" class="coupon-timer" style="color:var(--gold); margin-bottom:10px;"></div>
+                <div class="coupon-grid" id="couponGrid">
+                    <!-- कूपन यहाँ जावास्क्रिप्ट से डालेंगे -->
+                </div>
+                <div id="couponStatus"></div>
+                <!-- बुक नाउ बटन (शुरू में छिपा) -->
+                <button class="claim-btn" id="claimBtn" onclick="proceedCouponPayment()">बुक नाउ →</button>
+                <button class="btn" style="background:#333; margin-top:15px;" onclick="closeCouponModal()">बंद
+                    करें</button>
+            </div>
+        </div>
+
+        <!-- इतिहास पेज -->
+        <div id="historyPage" class="page-section">
+            <h3 style="color:var(--orange)">TRANSACTION HISTORY</h3>
+            <div id="orderList">लोड हो रहा है...</div>
+        </div>
+
+        <!-- प्रोफाइल पेज -->
+        <div id="profilePage" class="page-section">
+            <h3 style="color:var(--neon)">MY PROFILE</h3>
+            <div style="background:var(--card); padding:20px; border-radius:15px; text-align:left; margin:15px;">
+                <p>नाम: <b id="p-name" style="color:var(--orange)">...</b></p>
+                <p>मोबाइल: <b id="p-user">...</b></p>
+                <p>रेफरल ID: <b id="p-ref" style="color:var(--neon)">...</b></p>
+                <p>PM Points: <b id="p-points" style="color:var(--orange)">0</b></p>
+                <p>वॉलेट: <b id="p-wallet" style="color:#00c853">₹0</b></p>
+                <button class="btn" style="background:#444; color:white;" onclick="logout()">LOGOUT</button>
+            </div>
+        </div>
+
+        <!-- स्पिन मोडल -->
+        <div class="overlay" id="spinModal" style="display:none;">
+            <div class="popup-box">
+                <h2 style="color:var(--neon)">🎡 LUCKY SPIN 🎡</h2>
+                <div class="spinner-area">
+                    <div class="arrow">▼</div>
+                    <div class="wheel" id="wheel"><canvas id="wheelCanvas" width="250" height="250"></canvas></div>
+                    <div class="center-dot">PM</div>
+                </div>
+                <button class="spin-button" id="spinBtn" onclick="startSpin()">🌀 SPIN 🌀</button>
+                <div class="result-box" id="spinResult">स्पिन करें और पॉइंट्स कमाएँ!</div>
+                <button class="btn" style="background:#333; color:white;" onclick="closeSpinModal()">बंद करें</button>
+            </div>
+        </div>
+
+        <!-- वॉलेट मोडल -->
+        <div class="overlay" id="walletModal" style="display:none;">
+            <div class="popup-box">
+                <h2 style="color:#00c853">💰 वॉलेट</h2>
+                <div style="background:#0d1117; padding:20px; border-radius:15px; margin:20px 0;">
+                    <div style="font-size:14px; color:#aaa;">उपलब्ध बैलेंस</div>
+                    <div style="font-size:40px; font-weight:900; color:#00c853;">₹<span id="walletAmount">0</span></div>
+                </div>
+                <button class="btn" style="background:#00c853; color:white;" onclick="addMoney()">💰 पैसे
+                    जोड़ें</button>
+                <button class="btn" style="background:#333; color:white; margin-top:10px;"
+                    onclick="closeWalletModal()">बंद करें</button>
+            </div>
+        </div>
+
+        <!-- एड मनी पॉपअप -->
+        <div class="overlay" id="addMoneyPopup" style="display:none;">
+            <div class="popup-box" id="addMoneyContent">
+                <h2 style="color:#00c853">💰 पैसे जोड़ें</h2>
+                <div id="addMoneyStep1">
+                    <input type="number" id="addAmount" class="auth-input" placeholder="राशि दर्ज करें" min="1"
+                        step="1">
+                    <button class="btn" style="background:#00c853; color:white;"
+                        onclick="generateAddMoneyQR()">OK</button>
+                    <button class="btn" style="background:#333; color:white; margin-top:10px;"
+                        onclick="closeAddMoneyPopup()">रद्द करें</button>
+                </div>
+                <div id="addMoneyStep2" style="display:none;">
+                    <div id="addMoneyQRContainer"></div>
+                    <button class="btn" style="background:#28a745; color:white;" onclick="submitAddMoneyOrder()">✅ मैंने
+                        भुगतान कर दिया</button>
+                    <button class="btn" style="background:#333; color:white; margin-top:10px;"
+                        onclick="resetAddMoneyPopup()">वापस</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- रिचार्ज पॉपअप -->
+        <div class="overlay" id="rechPopup">
+            <div class="popup-box" style="margin-top: -50px;" id="rechPopupBox">
+                <h3 id="opTitle" style="color:var(--orange)">OPERATOR</h3>
+                <div id="discountDisplay"
+                    style="background: #ff7a00; color: black; padding: 8px; border-radius: 8px; margin-bottom: 10px; font-weight: bold;">
+                    आपका डिस्काउंट: ₹0</div>
+                <input type="tel" id="targetNo" placeholder="रिचार्ज मोबाइल नंबर" class="auth-input" maxlength="10"
+                    oninput="validateRechargeMobile(this)">
+                <div id="rech-mob-error" class="validation-error">मोबाइल नंबर 6,7,8,9 से शुरू होना चाहिए (10 अंक)</div>
+                <div id="plansCont" style="margin-top:10px;"></div>
+                <button class="btn" style="background:#333; color:white;"
+                    onclick="closeOverlay('rechPopup')">CLOSE</button>
+            </div>
+        </div>
+
+        <!-- बॉटम नेविगेशन -->
+        <div class="bottom-nav">
+            <div class="nav-item active" onclick="switchTab('homePage', this)">🏠<br>Home</div>
+            <div class="nav-item" onclick="switchTab('historyPage', this); loadOrders();">📜<br>Orders</div>
+            <div class="nav-item" onclick="switchTab('profilePage', this)">👤<br>Profile</div>
+        </div>
+    </div>
+
+    <script>
+        // ========== डीबग सिस्टम ==========
+        let debugMessages = [];
+        let debugError = null;
+        let lastApiResponse = null;
+
+        function logDebug(msg, type = 'info') {
+            debugMessages.push({ msg, type, time: new Date().toLocaleTimeString() });
+            console.log(`[DEBUG] ${msg}`);
+            updateDebugPanel();
+        }
+
+        function setDebugError(err) {
+            debugError = err;
+            logDebug('Error: ' + err, 'error');
+        }
+
+        function updateDebugPanel() {
+            const panel = document.getElementById('debugContent');
+            if (!panel) return;
+            let html = '';
+            if (debugError) html += `<div class="debug-error">⚠️ ${debugError}</div>`;
+            html += `<div class="debug-item">couponValues: ${JSON.stringify(couponValues)}</div>`;
+            html += `<div class="debug-item">realValues: ${JSON.stringify(realValues)}</div>`;
+            html += `<div class="debug-item">slider images: ${document.getElementById('advTrack')?.children.length || 0}</div>`;
+            html += `<div class="debug-item">marquee text: ${document.getElementById('marqueeMessage')?.innerText || ''}</div>`;
+            html += `<div class="debug-item">last API: ${lastApiResponse || 'none'}</div>`;
+            html += `<div class="debug-item">allMobileProducts: ${allMobileProducts?.length || 0}</div>`;
+            html += `<div class="debug-item">currentUser: ${currentUser ? 'logged in' : 'not logged'}</div>`;
+            debugMessages.slice(-5).forEach(m => {
+                html += `<div class="${m.type === 'error' ? 'debug-error' : (m.type === 'warn' ? 'debug-warning' : '')}">${m.time} - ${m.msg}</div>`;
+            });
+            panel.innerHTML = html;
+        }
+
+        // लोगो पर 5 बार क्लिक करने पर डीबग पैनल टॉगल
+        let tapCount = 0;
+        let tapTimer;
+        document.addEventListener('click', function (e) {
+            if (e.target.classList.contains('logo-main') || e.target.id === 'logoDebug') {
+                tapCount++;
+                clearTimeout(tapTimer);
+                tapTimer = setTimeout(() => { tapCount = 0; }, 1000);
+                if (tapCount >= 5) {
+                    toggleDebug();
+                    tapCount = 0;
+                }
+            }
+        });
+
+        function toggleDebug() {
+            const panel = document.getElementById('debugPanel');
+            panel.classList.toggle('show');
+            updateDebugPanel();
+        }
+
+        // कॉपी बटन का फंक्शन
+        function copyDebugInfo() {
+            const content = document.getElementById('debugContent').innerText;
+            navigator.clipboard.writeText(content).then(() => {
+                alert('डीबग जानकारी कॉपी हो गई! अब इसे यहाँ पेस्ट करें।');
+            }).catch(err => {
+                alert('कॉपी करने में समस्या: ' + err);
+            });
+        }
+
+        // सुरक्षित trim फंक्शन
+        function safeTrim(val) {
+            if (val === null || val === undefined) return '';
+            return val.toString().trim();
+        }
+
+        // fetch को इंटरसेप्ट करके एरर कैप्चर करें
+        const originalFetch = window.fetch;
+        window.fetch = async function (...args) {
+            try {
+                const response = await originalFetch(...args);
+                if (args[0].includes('Advertisement')) {
+                    const clone = response.clone();
+                    clone.text().then(text => {
+                        lastApiResponse = text.substring(0, 200);
+                        logDebug('API response: ' + lastApiResponse);
+                    }).catch(() => { });
+                }
+                return response;
+            } catch (e) {
+                setDebugError(e.message);
+                throw e;
+            }
+        };
+
+        // ========== कॉन्फ़िगरेशन ==========
+        const API_URL = "https://script.google.com/macros/s/AKfycbyiExp6P1l99frApp6HR_G6tRh1O9160gOdtFzZP4l57PN2ywHWddfnZRceiu0y2hWW2w/exec"; // ⚠️ अपना नया URL डालें
+        const SECRET_KEY = "sanatanweb";
+        const ADMIN_PHONE = "7677744450";
+
+        // ========== ग्लोबल वेरिएबल ==========
+        let currentUser = null;
+        let adminData = [];
+        let realValues = ["15", "17", "16", "3"]; // डिफ़ॉल्ट स्पिन वैल्यू
+        const realIndexes = [0, 2, 4, 6];
+        let isSpinning = false;
+        let currentRotation = 0;
+        let currentAddAmount = 0;
+        let currentDiscount = 0;
+        let spinCount = 0;
+        let lastSpinTime = 0;
+        let allMobileProducts = [];
+        let allUsers = [];
+        let textSliderProducts = [];
+        let textSliderIndex = 0;
+        let textSliderInterval;
+        let couponValues = ["₹10 छूट", "₹20 छूट", "30% छूट", "₹50 छूट"]; // डिफ़ॉल्ट कूपन
+        let selectedCoupon = null;
+        let couponCooldown = 0;
+        let couponTimerInterval = null;
+        let touchStartX = 0;
+        let touchEndX = 0;
+        let currentSlideIndex = 0;
+
+        // कूपन स्क्रैच के लिए
+        let gameLocked = false;
+        let currentScratchedIndex = -1;
+
+        // ========== यूजर डेटा रिफ्रेश करने का फंक्शन ==========
+        async function refreshUserData() {
+            if (!currentUser) return;
+            try {
+                const res = await fetch(`${API_URL}?sheet=Users&key=${SECRET_KEY}`);
+                const data = await res.json();
+                const updatedUser = data.find(u => u['Mobile ( User ID )'].toString() === currentUser['Mobile ( User ID )'].toString());
+                if (updatedUser) {
+                    currentUser = updatedUser;
+                    localStorage.setItem("pmUser", JSON.stringify(updatedUser));
+                    updateUI();
+                    logDebug('User data refreshed');
+                }
+            } catch (e) {
+                setDebugError('refreshUserData: ' + e.message);
+            }
+        }
+
+        // ========== स्टॉक स्लाइडर फंक्शन ==========
+        let stockInterval;
+        function loadLiveStock() {
+            const wrapper = document.getElementById('stockWrapper');
+            const loader = document.getElementById('loaderText');
+            if (!wrapper || !loader) return;
+
+            if (allMobileProducts.length === 0) {
+                loader.innerText = "कोई मॉडल उपलब्ध नहीं";
+                return;
+            }
+
+            wrapper.innerHTML = ''; // लोडर हटाएँ
+
+            allMobileProducts.forEach(item => {
+                const slide = document.createElement('div');
+                slide.className = 'stock-slide';
+                slide.innerHTML = `
+                    <div class="stock-company">
+                        ${item.COMPANY || ''} <span class="stock-model">${item.MODELS || ''}</span>
+                    </div>
+                    <div class="stock-price">
+                        मात्र ₹${item['DP Price'] || 0}/-
+                    </div>
+                `;
+                wrapper.appendChild(slide);
+            });
+
+            if (stockInterval) clearInterval(stockInterval);
+
+            let currentIndex = 0;
+            stockInterval = setInterval(() => {
+                currentIndex++;
+                if (currentIndex >= allMobileProducts.length) currentIndex = 0;
+                wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }, 3000);
+        }
+
+        // ========== सर्च फंक्शन (अब पुराने पॉपअप में खोलेगा) ==========
+        function searchStock() {
+            const query = document.getElementById('userInput')?.value.trim().toLowerCase();
+            if (!query) { alert("कृपया मॉडल का नाम लिखें!"); return; }
+
+            const results = allMobileProducts.filter(item =>
+                (item.MODELS && item.MODELS.toLowerCase().includes(query)) ||
+                (item.COMPANY && item.COMPANY.toLowerCase().includes(query))
+            );
+
+            if (results.length > 0) {
+                // पहला रिजल्ट लेकर उसे प्रोडक्ट डिटेल पॉपअप में दिखाएँ
+                showProductDetail(results[0]);
+            } else {
+                alert('कोई मॉडल नहीं मिला!');
+            }
+        }
+
+        // ========== मोबाइल वैलिडेशन ==========
+        function isValidMobile(mobile) {
+            return /^[6-9]\d{9}$/.test(mobile);
+        }
+
+        function validateMobile(input, type) {
+            const errorDiv = type === 'login' ? document.getElementById('l-mob-error') : document.getElementById('r-mob-error');
+            const btn = type === 'login' ? document.getElementById('loginBtn') : document.getElementById('registerBtn');
+            if (!errorDiv || !btn) return;
+            const val = input.value.trim();
+
+            if (val.length > 0) {
+                if (!isValidMobile(val)) {
+                    input.classList.add('invalid-input');
+                    errorDiv.style.display = 'block';
+                    btn.disabled = true;
+                    // अगर 10 अंक पूरे हो गए हैं और गलत है, तो अलर्ट दिखाएँ
+                    if (val.length === 10) {
+                        alert('अमान्य मोबाइल नंबर! नंबर 6,7,8,9 से शुरू होना चाहिए।');
+                    }
+                } else {
+                    input.classList.remove('invalid-input');
+                    errorDiv.style.display = 'none';
+                    btn.disabled = false;
+                }
+            } else {
+                input.classList.remove('invalid-input');
+                errorDiv.style.display = 'none';
+                btn.disabled = true;
+            }
+        }
+
+        function validateRechargeMobile(input) {
+            const errorDiv = document.getElementById('rech-mob-error');
+            const plansCont = document.getElementById('plansCont');
+            if (!errorDiv) return;
+            const val = input.value.trim();
+
+            if (val.length > 0) {
+                if (!isValidMobile(val)) {
+                    input.classList.add('invalid-input');
+                    errorDiv.style.display = 'block';
+                    if (val.length === 10) {
+                        alert('अमान्य मोबाइल नंबर! नंबर 6,7,8,9 से शुरू होना चाहिए।');
+                    }
+                    if (plansCont) plansCont.innerHTML = '';
+                } else {
+                    input.classList.remove('invalid-input');
+                    errorDiv.style.display = 'none';
+                    loadPlansForNumber();
+                }
+            } else {
+                input.classList.remove('invalid-input');
+                errorDiv.style.display = 'none';
+                if (plansCont) plansCont.innerHTML = '';
+            }
+        }
+
+        function loadPlansForNumber() {
+            const input = document.getElementById('targetNo');
+            if (!input) return;
+            if (input.value.length === 10 && isValidMobile(input.value)) {
+                const op = document.getElementById("opTitle")?.innerText || '';
+                const matched = adminData.filter(p => p.Operators && p.Operators.toString().toUpperCase() === op);
+                let html = "";
+                matched.forEach(p => {
+                    const originalPrice = parseFloat(p.PRICE) || 0;
+                    const discountedPrice = Math.max(0, originalPrice - currentDiscount);
+                    html += `<div style="background:#000; padding:10px; border:1px solid var(--orange); border-radius:10px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                        <div style="text-align:left;">
+                            <b>₹${originalPrice}</b> 
+                            ${currentDiscount > 0 ? `<span style="color:#00ff00;"> ➔ ₹${discountedPrice}</span>` : ''}
+                            <br><small>${p['PLAN DETAILS']}</small>
+                        </div>
+                        <button class="btn" style="width:auto; padding:5px 10px; margin:0;" onclick="showQR('${originalPrice}', '${p['PLAN DETAILS']}')">BUY</button>
+                    </div>`;
+                });
+                const plansCont = document.getElementById('plansCont');
+                if (plansCont) plansCont.innerHTML = html || "No Plans Found";
+            }
+        }
+
+        // ---------- AUTH FUNCTIONS ----------
+        function switchAuth(isReg) {
+            document.getElementById('loginBox').style.display = isReg ? 'none' : 'block';
+            document.getElementById('regBox').style.display = isReg ? 'block' : 'none';
+        }
+
+        function genID() {
+            let n = document.getElementById('r-name').value.trim().replace(/\s+/g, '').substring(0, 2).toUpperCase();
+            let a = document.getElementById('r-aadhar').value.trim();
+            document.getElementById('refID-view').innerText = (n.length == 2 && a.length == 4) ? "Your ID: PM" + n + a : "Your ID: PM----";
+        }
+
+        async function loadAllUsers() {
+            try {
+                const response = await fetch(`${API_URL}?sheet=Users&key=${SECRET_KEY}`);
+                const data = await response.json();
+                if (Array.isArray(data)) allUsers = data;
+                else if (data.data) allUsers = data.data;
+                else allUsers = [];
+                logDebug('Users loaded: ' + allUsers.length);
+            } catch (error) {
+                setDebugError('loadAllUsers: ' + error.message);
+                allUsers = [];
+            }
+        }
+
+        async function doRegister() {
+            const name = document.getElementById('r-name').value,
+                mob = document.getElementById('r-mob').value.trim(),
+                pin = document.getElementById('r-pin').value,
+                aadhar = document.getElementById('r-aadhar').value,
+                coupon = document.getElementById('r-coupon').value.trim().toUpperCase();
+
+            if (!name || mob.length < 10 || pin.length < 6) return alert("Fill all details!");
+            if (!isValidMobile(mob)) {
+                alert('अमान्य मोबाइल नंबर! नंबर 6,7,8,9 से शुरू होना चाहिए और 10 अंकों का होना चाहिए।');
+                return;
+            }
+
+            if (allUsers.length === 0) await loadAllUsers();
+
+            const existing = allUsers.find(u => u['Mobile ( User ID )']?.toString() === mob);
+            if (existing) {
+                alert('यह मोबाइल नंबर पहले से पंजीकृत है!');
+                return;
+            }
+
+            let pts = (coupon === "NEW100") ? 100 : (coupon.startsWith("PM") ? 50 : 0);
+            const myRef = "PM" + name.replace(/\s+/g, '').substring(0, 2).toUpperCase() + aadhar;
+
+            const payload = {
+                key: SECRET_KEY, sheet: "Users", data: {
+                    "Reg_Date": new Date().toLocaleString(),
+                    "Name": name,
+                    "Mobile ( User ID )": mob,
+                    "PIN 6 digit": pin,
+                    "Aadhar_Last4": aadhar,
+                    "Use coupon": coupon,
+                    "User referral ID": myRef,
+                    "R. Money": 0,
+                    "PM Points": pts,
+                    "alert message": "Welcome",
+                    "Last Log Date": "-",
+                    "Status/ Blocked/ Active": "Active"
+                }
+            };
+
+            await fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(payload) });
+            alert("Success! ID: " + myRef);
+            allUsers.push({ 'Mobile ( User ID )': mob });
+            switchAuth(false);
+        }
+
+        async function checkUserStatus(mobile) {
+            try {
+                const res = await fetch(`${API_URL}?sheet=Users&key=${SECRET_KEY}`);
+                const data = await res.json();
+                const user = data.find(x => x['Mobile ( User ID )'].toString() === mobile);
+                if (user) {
+                    const status = user['Status/ Blocked/ Active'] || '';
+                    if (status.toString().toLowerCase().includes('blocked')) {
+                        alert(`आपका खाता ब्लॉक 🚫 कर दिया गया है। कृपया एडमिन से संपर्क करें 📞: ${ADMIN_PHONE}`);
+                        logout();
+                        return false;
+                    }
+                    return user;
+                }
+                return null;
+            } catch (e) {
+                logDebug('Status check failed, but keeping user logged in locally', 'warn');
+                return currentUser;
+            }
+        }
+
+        async function doLogin() {
+            const mob = document.getElementById('l-mob').value.trim();
+            const pin = document.getElementById('l-pin').value;
+            if (!isValidMobile(mob)) {
+                alert('अमान्य मोबाइल नंबर! नंबर 6,7,8,9 से शुरू होना चाहिए और 10 अंकों का होना चाहिए।');
+                return;
+            }
+            const res = await fetch(`${API_URL}?sheet=Users&key=${SECRET_KEY}`);
+            const data = await res.json();
+            const u = data.find(x => x['Mobile ( User ID )'].toString() === mob && x['PIN 6 digit'].toString() === pin);
+            if (u) {
+                const status = u['Status/ Blocked/ Active'] || '';
+                if (status.toString().toLowerCase().includes('blocked')) {
+                    alert(`आपका खाता ब्लॉक 🚫 कर दिया गया है। कृपया एडमिन से संपर्क करें 📞: ${ADMIN_PHONE}`);
+                    return;
+                }
+                currentUser = u;
+                localStorage.setItem("pmUser", JSON.stringify(u));
+                loginSuccess();
+                logDebug('User logged in: ' + mob);
+            } else {
+                alert("Invalid Login!");
+                logDebug('Failed login attempt', 'warn');
+            }
+        }
+
+        function loginSuccess() {
+            document.getElementById('auth-section').style.display = 'none';
+            document.getElementById('main-website').style.display = 'block';
+            loadSpinData();
+            updateUI();
+            fetchCoreData();
+            loadAdvData();
+            startTimer();
+        }
+
+        function updateUI() {
+            document.getElementById('top-user-name').innerText = "Hi, " + currentUser.Name;
+            document.getElementById('spinPoints').innerText = '₹' + (currentUser['PM Points'] || 0);
+            document.getElementById('walletBalance').innerText = '₹' + (currentUser['R. Money'] || 0);
+            document.getElementById('p-name').innerText = currentUser.Name;
+            document.getElementById('p-user').innerText = currentUser['Mobile ( User ID )'];
+            document.getElementById('p-ref').innerText = currentUser['User referral ID'];
+            document.getElementById('p-points').innerText = currentUser['PM Points'] || 0;
+            document.getElementById('p-wallet').innerText = '₹' + (currentUser['R. Money'] || 0);
+        }
+
+        function loadSpinData() {
+            if (!currentUser) return;
+            const key = `spinData_${currentUser['Mobile ( User ID )']}`;
+            const data = localStorage.getItem(key);
+            if (data) {
+                const parsed = JSON.parse(data);
+                spinCount = parsed.count || 0;
+                lastSpinTime = parsed.lastTime || 0;
+            } else {
+                spinCount = 0;
+                lastSpinTime = 0;
+            }
+            const now = Date.now();
+            if (lastSpinTime > 0 && now - lastSpinTime > 24 * 60 * 60 * 1000) {
+                spinCount = 0;
+                lastSpinTime = 0;
+                saveSpinData();
+            }
+        }
+        function saveSpinData() {
+            if (!currentUser) return;
+            const key = `spinData_${currentUser['Mobile ( User ID )']}`;
+            localStorage.setItem(key, JSON.stringify({ count: spinCount, lastTime: lastSpinTime }));
+        }
+        function startTimer() {
+            if (spinCount >= 2) {
+                const now = Date.now();
+                const nextTime = lastSpinTime + 24 * 60 * 60 * 1000;
+                const remaining = nextTime - now;
+                if (remaining > 0) {
+                    showTimer(remaining);
+                } else {
+                    spinCount = 0;
+                    lastSpinTime = 0;
+                    saveSpinData();
+                    hideTimer();
+                }
+            } else {
+                hideTimer();
+            }
+        }
+        function showTimer(ms) {
+            const timerDiv = document.getElementById('timerDisplay');
+            if (!timerDiv) return;
+            timerDiv.style.display = 'block';
+            updateTimerDisplay(ms);
+            if (window.timerInterval) clearInterval(window.timerInterval);
+            window.timerInterval = setInterval(() => {
+                const now = Date.now();
+                const nextTime = lastSpinTime + 24 * 60 * 60 * 1000;
+                const remaining = nextTime - now;
+                if (remaining <= 0) {
+                    clearInterval(window.timerInterval);
+                    spinCount = 0;
+                    lastSpinTime = 0;
+                    saveSpinData();
+                    hideTimer();
+                } else {
+                    updateTimerDisplay(remaining);
+                }
+            }, 1000);
+        }
+        function updateTimerDisplay(ms) {
+            const timerDiv = document.getElementById('timerDisplay');
+            if (!timerDiv) return;
+            const hours = Math.floor(ms / (60 * 60 * 1000));
+            const minutes = Math.floor((ms % (60 * 60 * 1000)) / (60 * 1000));
+            const seconds = Math.floor((ms % (60 * 1000)) / 1000);
+            timerDiv.innerText = `अगला मौका: ${hours} घंटे ${minutes} मिनट ${seconds} सेकंड में`;
+        }
+        function hideTimer() {
+            const timerDiv = document.getElementById('timerDisplay');
+            if (timerDiv) timerDiv.style.display = 'none';
+            if (window.timerInterval) clearInterval(window.timerInterval);
+        }
+
+        function openSpinModal() {
+            if (!currentUser) return alert('पहले लॉगिन करें');
+            if (spinCount >= 2) {
+                alert('आप आज के 2 स्पिन पूरे कर चुके हैं। कल फिर आइए!');
+                return;
+            }
+            drawWheel();
+            document.getElementById('spinModal').style.display = 'flex';
+        }
+        function closeSpinModal() { if (!isSpinning) document.getElementById('spinModal').style.display = 'none'; }
+
+        async function showWallet() {
+            if (!currentUser) return alert('पहले लॉगिन करें');
+            await refreshUserData();
+            document.getElementById('walletAmount').innerText = currentUser['R. Money'] || 0;
+            document.getElementById('walletModal').style.display = 'flex';
+        }
+        function closeWalletModal() { document.getElementById('walletModal').style.display = 'none'; }
+        function addMoney() {
+            closeWalletModal();
+            document.getElementById('addMoneyStep1').style.display = 'block';
+            document.getElementById('addMoneyStep2').style.display = 'none';
+            document.getElementById('addAmount').value = '';
+            document.getElementById('addMoneyPopup').style.display = 'flex';
+        }
+        function closeAddMoneyPopup() { document.getElementById('addMoneyPopup').style.display = 'none'; }
+        function resetAddMoneyPopup() {
+            document.getElementById('addMoneyStep1').style.display = 'block';
+            document.getElementById('addMoneyStep2').style.display = 'none';
+            document.getElementById('addAmount').value = '';
+        }
+        function generateAddMoneyQR() {
+            const amount = document.getElementById('addAmount').value;
+            if (!amount || amount <= 0) { alert('कृपया सही राशि दर्ज करें'); return; }
+            currentAddAmount = amount;
+            let myUpiId = "vyapar.176971501543@hdfcbank";
+            let myName = "PM%20BAZAR";
+            let upiLink = `upi://pay?pa=${myUpiId}&pn=${myName}&am=${amount}&cu=INR&tn=ADD_MONEY_${currentUser['Mobile ( User ID )']}`;
+            let qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiLink)}`;
+            document.getElementById('addMoneyQRContainer').innerHTML = `
+                <div style="background:white; padding:20px; border-radius:15px; color:black; text-align:center;">
+                    <img src="${qrUrl}" style="width:200px; height:200px; margin-bottom:10px;">
+                    <b style="font-size:22px;">Pay ₹${amount}</b>
+                    <p style="color:red; margin:10px 0;">⚠️ भुगतान के बाद ही बटन दबाएं</p>
+                </div>
+            `;
+            document.getElementById('addMoneyStep1').style.display = 'none';
+            document.getElementById('addMoneyStep2').style.display = 'block';
+        }
+        async function submitAddMoneyOrder() {
+            if (!currentAddAmount) return;
+            const payload = {
+                key: SECRET_KEY, sheet: "Order History", data: {
+                    "Timestamp": new Date().toLocaleString(),
+                    "Type": "ADD MONEY",
+                    "User ID": currentUser['Mobile ( User ID )'],
+                    "Order ID": "PMB" + Math.floor(Math.random() * 900000),
+                    "Order Status": "Pending",
+                    "Price": currentAddAmount,
+                    "Details": "वॉलेट में पैसे जोड़ना"
+                }
+            };
+            await fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(payload) });
+            alert("आपका ऑर्डर सबमिट हो गया है! जल्द ही वॉलेट अपडेट होगा।");
+            closeAddMoneyPopup();
+            loadOrders();
+        }
+
+        function drawWheel() {
+            const canvas = document.getElementById('wheelCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const centerX = 125, centerY = 125, radius = 125;
+            const sliceAngle = (2 * Math.PI) / 8;
+            const colors = ["#b71c1c", "#455a64", "#006064", "#e65100", "#f57f17", "#4a148c", "#1b5e20", "#0d47a1"];
+            let displayPrizes = new Array(8).fill("");
+            displayPrizes[1] = "50% OFF";
+            displayPrizes[3] = "🏆₹348";
+            displayPrizes[5] = "20% OFF";
+            displayPrizes[7] = "₹50";
+            realIndexes.forEach((idx, i) => {
+                if (realValues[i]?.trim()) {
+                    let val = safeTrim(realValues[i]);
+                    if (!val.startsWith('₹')) val = '₹' + val;
+                    displayPrizes[idx] = val;
+                }
+            });
+            ctx.clearRect(0, 0, 250, 250);
+            displayPrizes.forEach((prize, i) => {
+                ctx.beginPath();
+                ctx.fillStyle = colors[i];
+                ctx.moveTo(centerX, centerY);
+                ctx.arc(centerX, centerY, radius, i * sliceAngle, (i + 1) * sliceAngle);
+                ctx.fill();
+                ctx.save();
+                ctx.translate(centerX, centerY);
+                ctx.rotate(i * sliceAngle + sliceAngle / 2);
+                ctx.fillStyle = "white";
+                ctx.font = "bold 12px Arial";
+                ctx.textAlign = "right";
+                let displayText = prize.toString();
+                if (displayText.length > 8) displayText = displayText.substring(0, 6) + '..';
+                ctx.fillText(displayText, radius - 20, 5);
+                ctx.restore();
+            });
+        }
+
+        // ---------- LOAD ADVERTISEMENT DATA ----------
+        async function loadAdvData() {
+            try {
+                document.getElementById('spinBtn').innerHTML = '<span class="loading"></span> लोड हो रहा...';
+                document.getElementById('spinBtn').disabled = true;
+
+                const response = await fetch(`${API_URL}?sheet=Advertisement&key=${SECRET_KEY}`);
+                const data = await response.json();
+
+                let rows = [];
+                if (Array.isArray(data)) rows = data;
+                else if (data.data) rows = data.data;
+                else rows = [];
+
+                // --- MARQUEE (A2:A5) ---
+                if (rows.length >= 5) {
+                    const messages = [];
+                    for (let i = 1; i <= 4; i++) {
+                        const row = rows[i];
+                        if (row) {
+                            let msg = "";
+                            if (Array.isArray(row) && row.length > 0) {
+                                msg = safeTrim(row[0]);
+                            } else if (typeof row === 'object') {
+                                const values = Object.values(row);
+                                msg = safeTrim(values[0]);
+                            }
+                            if (msg) messages.push(msg);
+                        }
+                    }
+                    const reversed = messages.reverse();
+                    const marqueeText = reversed.join('  •  ');
+                    const marqueeEl = document.getElementById('marqueeMessage');
+                    if (marqueeEl) marqueeEl.innerText = marqueeText;
+                } else {
+                    const marqueeEl = document.getElementById('marqueeMessage');
+                    if (marqueeEl) marqueeEl.innerText = 'कोई संदेश नहीं • कृपया बाद में देखें';
+                }
+
+                // --- RECHARGE SPIN (C2:C5) ---
+                if (rows.length >= 5) {
+                    const newValues = [];
+                    for (let i = 1; i <= 4; i++) {
+                        const row = rows[i];
+                        let value = "";
+                        if (row) {
+                            if (Array.isArray(row) && row.length > 2) {
+                                value = safeTrim(row[2]);
+                            } else if (typeof row === 'object') {
+                                const values = Object.values(row);
+                                value = safeTrim(values[2]);
+                            }
+                        }
+                        newValues.push(value);
+                    }
+                    realValues = newValues.filter(v => v !== "");
+                    if (realValues.length < 4) realValues = ["15", "17", "16", "3"];
+                } else {
+                    realValues = ["15", "17", "16", "3"];
+                }
+
+                // --- STORE VISIT COUPON (D2:D5) ---
+                if (rows.length >= 5) {
+                    const couponList = [];
+                    for (let i = 1; i <= 4; i++) {
+                        const row = rows[i];
+                        let value = "";
+                        if (row) {
+                            if (Array.isArray(row) && row.length > 3) {
+                                value = safeTrim(row[3]);
+                            } else if (typeof row === 'object') {
+                                const values = Object.values(row);
+                                value = safeTrim(values[3]);
+                            }
+                        }
+                        if (value) couponList.push(value);
+                    }
+                    couponValues = couponList;
+                }
+
+                while (couponValues.length < 4) {
+                    couponValues.push("₹10 छूट");
+                }
+
+                drawWheel();
+                logDebug('loadAdvData completed, coupons: ' + JSON.stringify(couponValues));
+
+            } catch (error) {
+                setDebugError('loadAdvData: ' + error.message);
+                realValues = ["15", "17", "16", "3"];
+                couponValues = ["₹10 छूट", "₹20 छूट", "30% छूट", "₹50 छूट"];
+                drawWheel();
+                document.getElementById('spinResult').innerHTML = '⚠️ API से डेटा नहीं मिला, डिफ़ॉल्ट वैल्यू इस्तेमाल हो रही हैं।';
+                const marqueeEl = document.getElementById('marqueeMessage');
+                if (marqueeEl) marqueeEl.innerText = 'कोई संदेश नहीं • कृपया बाद में देखें';
+            } finally {
+                document.getElementById('spinBtn').innerHTML = '🌀 SPIN 🌀';
+                document.getElementById('spinBtn').disabled = false;
+            }
+        }
+
+        async function updateUserPoints(newPoints, alertMessage) {
+            try {
+                if (!currentUser) return false;
+                const payload = {
+                    key: SECRET_KEY,
+                    sheet: "Users",
+                    action: "updatePoints",
+                    mobile: currentUser['Mobile ( User ID )'].toString(),
+                    points: newPoints,
+                    alertMessage: alertMessage
+                };
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const responseText = await response.text();
+                logDebug('Update points response: ' + responseText);
+                return true;
+            } catch (error) {
+                setDebugError('updateUserPoints: ' + error.message);
+                return false;
+            }
+        }
+
+        function startSpin() {
+            if (isSpinning) return;
+            const currentPoints = parseFloat(currentUser['PM Points']) || 0;
+            if (currentPoints <= 0) {
+                document.getElementById('spinResult').innerHTML = '❌ आपके पास पर्याप्त पॉइंट्स नहीं हैं!';
+                return;
+            }
+            if (spinCount >= 2) {
+                alert('आप आज के 2 स्पिन पूरे कर चुके हैं। कल फिर आइए!');
+                closeSpinModal();
+                return;
+            }
+            isSpinning = true;
+            document.getElementById('spinBtn').disabled = true;
+            const wheel = document.getElementById('wheel');
+            const resultBox = document.getElementById('spinResult');
+            resultBox.innerHTML = '🌀 स्पिन हो रहा है... 🌀';
+            let availableIndices = [];
+            for (let i = 0; i < realIndexes.length; i++) {
+                if (realValues[i]?.trim()) {
+                    availableIndices.push(realIndexes[i]);
+                }
+            }
+            if (availableIndices.length === 0) {
+                resultBox.innerHTML = '❌ कोई वैल्यू नहीं';
+                isSpinning = false;
+                document.getElementById('spinBtn').disabled = false;
+                return;
+            }
+            const targetIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
+            const degreesPerSlice = 360 / 8;
+            const stopAt = (targetIndex * degreesPerSlice) + (degreesPerSlice / 2);
+            let targetRotation = (360 * 8) + (270 - stopAt);
+            while (targetRotation <= currentRotation) {
+                targetRotation += 360;
+            }
+            currentRotation = targetRotation;
+            wheel.style.transform = `rotate(${currentRotation}deg)`;
+            setTimeout(async () => {
+                isSpinning = false;
+                const realIdx = realIndexes.indexOf(targetIndex);
+                if (realIdx !== -1 && realValues[realIdx]) {
+                    const wonValue = realValues[realIdx];
+                    const wonNumber = parseFloat(wonValue.replace(/[^0-9.-]/g, '')) || 0;
+                    const newPoints = Math.max(0, currentPoints - wonNumber);
+                    const success = await updateUserPoints(newPoints, `Spun and deducted ₹${wonNumber}`);
+                    if (success) {
+                        currentUser['PM Points'] = newPoints;
+                        localStorage.setItem("pmUser", JSON.stringify(currentUser));
+                        updateUI();
+                        resultBox.innerHTML = `🎉 बधाई हो! ₹${wonNumber} कट गए!<br>शेष पॉइंट्स: ₹${newPoints}`;
+                    } else {
+                        resultBox.innerHTML = `🎉 बधाई हो! ₹${wonNumber} कट गए!<br>⚠️ लेकिन डेटा सेव नहीं हुआ, लोकल अपडेट किया गया।`;
+                        currentUser['PM Points'] = newPoints;
+                        localStorage.setItem("pmUser", JSON.stringify(currentUser));
+                        updateUI();
+                    }
+                    currentDiscount = wonNumber;
+                    spinCount++;
+                    lastSpinTime = Date.now();
+                    saveSpinData();
+                    if (spinCount >= 2) startTimer();
+                } else {
+                    resultBox.innerHTML = '⚠️ कुछ गड़बड़ी हुई';
+                }
+                document.getElementById('spinBtn').disabled = false;
+            }, 8000);
+        }
+
+        // ---------- RECHARGE FUNCTIONS ----------
+        function openRech(op) {
+            document.getElementById("opTitle").innerText = op;
+            const plansCont = document.getElementById('plansCont');
+            if (plansCont) plansCont.innerHTML = "";
+            document.getElementById("targetNo").value = "";
+            document.getElementById("discountDisplay").innerText = `आपका डिस्काउंट: ₹${currentDiscount}`;
+            document.getElementById('rechPopup').style.display = 'flex';
+            document.getElementById('rechPopupBox').style.marginTop = '-100px';
+            setTimeout(() => {
+                document.getElementById('targetNo').focus();
+            }, 300);
+        }
+        function showQR(originalPrice, plan) {
+            const mob = document.getElementById('targetNo').value.trim();
+            if (!isValidMobile(mob)) {
+                alert('अमान्य मोबाइल नंबर! कृपया सही नंबर दर्ज करें (10 अंक, 6-9 से शुरू)');
+                return;
+            }
+            let price = parseFloat(originalPrice);
+            let finalPrice = Math.max(0, price - currentDiscount);
+            let myUpiId = "vyapar.176971501543@hdfcbank";
+            let myName = "PM%20BAZAR";
+            let targetNum = mob;
+            let upiLink = `upi://pay?pa=${myUpiId}&pn=${myName}&am=${finalPrice}&cu=INR&tn=PMB_${targetNum}`;
+            let qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiLink)}`;
+            const plansCont = document.getElementById('plansCont');
+            if (plansCont) plansCont.innerHTML = `
+                <div style="background:white; padding:20px; border-radius:15px; color:black; text-align:center;">
+                    <img src="${qrUrl}" style="width:200px; height:200px; margin-bottom:10px;">
+                    <b style="font-size:22px;">Pay ₹${finalPrice}</b>
+                    <p style="color:red; margin:10px 0;">⚠️ भुगतान के बाद ही बटन दबाएं</p>
+                    <button class="btn" style="background:#28a745; color:white;" onclick="submitOrder('${finalPrice}', '${plan}', ${originalPrice})">I HAVE PAID</button>
+                    <button style="margin-top:10px; background:none; border:none; color:#666; text-decoration:underline; cursor:pointer;" onclick="location.reload()">Cancel</button>
+                </div>`;
+        }
+        async function submitOrder(finalPrice, plan, originalPrice) {
+            const payload = {
+                key: SECRET_KEY, sheet: "Order History", data: {
+                    "Timestamp": new Date().toLocaleString(),
+                    "Type": "RECHARGE",
+                    "User ID": currentUser['Mobile ( User ID )'],
+                    "Order ID": "PMB" + Math.floor(Math.random() * 900000),
+                    "Order Status": "Pending",
+                    "Price": finalPrice,
+                    "Details": plan + " | Num: " + document.getElementById('targetNo').value + (currentDiscount > 0 ? ` | Discount: ₹${currentDiscount}` : "")
+                }
+            };
+            await fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(payload) });
+            alert("Order Submitted!");
+            currentDiscount = 0;
+            document.getElementById("discountDisplay").innerText = `आपका डिस्काउंट: ₹0`;
+            closeOverlay('rechPopup');
+            loadOrders();
+        }
+
+        async function loadOrders() {
+            const data = await (await fetch(`${API_URL}?sheet=Order History&key=${SECRET_KEY}`)).json();
+            const mine = data.filter(o => o['User ID'].toString() === currentUser['Mobile ( User ID )'].toString());
+            document.getElementById("orderList").innerHTML = "";
+            mine.reverse().forEach(o => {
+                const status = (o['Order Status'] || "Pending").toLowerCase();
+                let statusClass = "st-pending";
+                let displayStatus = o['Order Status'] || "Pending";
+                if (status.includes("confirm")) statusClass = "st-confirm";
+                else if (status.includes("wait") || status.includes("5 minutes")) statusClass = "st-wait";
+                else if (status.includes("fail")) statusClass = "st-failed";
+                else if (status.includes("deliver")) statusClass = "st-delivered";
+                else if (status.includes("process")) statusClass = "st-processing";
+                document.getElementById("orderList").innerHTML += `
+                    <div class="order-card ${statusClass}">
+                        <span class="status-badge">${displayStatus}</span>
+                        <div class="order-id">Order ID: ${o['Order ID'] || 'N/A'}</div>
+                        <div>${o.Type || 'N/A'} - ₹${o.Price || 0}</div>
+                        <small>${o.Details || ''}</small>
+                        <div style="font-size:10px; color:#aaa; margin-top:5px;">${o.Timestamp || ''}</div>
+                    </div>`;
+            });
+        }
+
+        // ---------- MOBILE PRODUCTS AND FILTER (सुरक्षित) ----------
+        async function fetchCoreData() {
+            try {
+                // स्लाइडर इमेज (B2:B6)
+                const adv = await (await fetch(`${API_URL}?sheet=Advertisement&key=${SECRET_KEY}`)).json();
+                const track = document.getElementById("advTrack");
+                if (track) {
+                    track.innerHTML = '';
+
+                    let rows = [];
+                    if (Array.isArray(adv)) rows = adv;
+                    else if (adv.data) rows = adv.data;
+                    else rows = [];
+
+                    for (let i = 1; i <= 5; i++) {
+                        const row = rows[i];
+                        if (row) {
+                            let imgUrl = "";
+                            if (Array.isArray(row) && row.length > 1) {
+                                imgUrl = safeTrim(row[1]);
+                            } else if (typeof row === 'object') {
+                                const values = Object.values(row);
+                                imgUrl = safeTrim(values[1]);
+                            }
+                            if (imgUrl && imgUrl.startsWith('http')) {
+                                const img = document.createElement('img');
+                                img.src = imgUrl;
+                                img.className = 'adv-img';
+                                img.onclick = () => showImagePopup(imgUrl);
+                                track.appendChild(img);
+                            }
+                        }
+                    }
+                    if (track.children.length === 0) {
+                        const img = document.createElement('img');
+                        img.src = 'https://via.placeholder.com/400x200?text=No+Image';
+                        img.className = 'adv-img';
+                        track.appendChild(img);
+                    }
+                    startSlider();
+                }
+
+                // Admin data (for recharge plans)
+                adminData = await (await fetch(`${API_URL}?sheet=Admin&key=${SECRET_KEY}`)).json();
+
+                // Mobile products
+                const mob = await (await fetch(`${API_URL}?sheet=Mobile&key=${SECRET_KEY}`)).json();
+                allMobileProducts = mob;
+
+                // Company buttons
+                const companies = [...new Set(mob.map(p => p['COMPANY']).filter(Boolean))];
+                const companyDiv = document.getElementById('companyButtons');
+                if (companyDiv) {
+                    companyDiv.innerHTML = '';
+                    companies.forEach(company => {
+                        const btn = document.createElement('button');
+                        btn.className = 'company-btn';
+                        btn.innerText = company;
+                        btn.onclick = () => showFilterBar(company);
+                        companyDiv.appendChild(btn);
+                    });
+                }
+
+                const filterDiv = document.getElementById('filterCompanyButtons');
+                if (filterDiv) {
+                    filterDiv.innerHTML = '';
+                    companies.forEach(company => {
+                        const btn = document.createElement('button');
+                        btn.className = 'filter-company-btn';
+                        btn.innerText = company;
+                        btn.onclick = () => filterByCompany(company);
+                        filterDiv.appendChild(btn);
+                    });
+                }
+
+                initTextSlider();
+                displayHomeProducts();
+
+                const sliderBox = document.getElementById('sliderBox');
+                if (sliderBox) {
+                    sliderBox.addEventListener('touchstart', handleTouchStart, false);
+                    sliderBox.addEventListener('touchmove', handleTouchMove, false);
+                    sliderBox.addEventListener('touchend', handleTouchEnd, false);
+                }
+
+                // अब लाइव स्टॉक स्लाइडर लोड करें
+                loadLiveStock();
+
+            } catch (e) {
+                setDebugError('fetchCoreData: ' + e.message);
+            }
+        }
+
+        function handleTouchStart(event) { touchStartX = event.touches[0].clientX; }
+        function handleTouchMove(event) { touchEndX = event.touches[0].clientX; }
+        function handleTouchEnd() {
+            const track = document.getElementById('advTrack');
+            if (track && track.children.length > 0) {
+                if (touchStartX - touchEndX > 50) {
+                    currentSlideIndex = (currentSlideIndex + 1) % track.children.length;
+                    track.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+                } else if (touchEndX - touchStartX > 50) {
+                    currentSlideIndex = (currentSlideIndex - 1 + track.children.length) % track.children.length;
+                    track.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+                }
+            }
+        }
+
+        function showFilterBar(company) {
+            document.getElementById('mobileFilterBar').style.display = 'flex';
+            document.getElementById('homeContent').style.display = 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            filterByCompany(company);
+        }
+        function hideFilterBar() {
+            document.getElementById('mobileFilterBar').style.display = 'none';
+            document.getElementById('homeContent').style.display = 'block';
+            displayHomeProducts();
+        }
+        function filterByCompany(company) {
+            document.querySelectorAll('.filter-company-btn').forEach(btn => btn.classList.remove('active'));
+            const activeBtn = Array.from(document.querySelectorAll('.filter-company-btn')).find(btn => btn.innerText === company);
+            if (activeBtn) activeBtn.classList.add('active');
+            const filtered = allMobileProducts.filter(p => p['COMPANY'] === company);
+            displayMobileProducts(filtered);
+        }
+        function displayMobileProducts(products) {
+            const grid = document.getElementById('prodGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+            products.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.onclick = () => showProductDetail(p);
+                card.innerHTML = `
+                    <img src="${p['image link']}" alt="${p.MODELS}" onerror="this.src='https://via.placeholder.com/100?text=No+Image'">
+                    <p>${p.MODELS}</p>
+                    <b>₹${p['DP Price']}</b>
+                `;
+                grid.appendChild(card);
+            });
+        }
+        function displayHomeProducts() { displayMobileProducts(allMobileProducts); }
+
+        function initTextSlider() {
+            textSliderProducts = allMobileProducts.map(p => ({
+                company: p['COMPANY'],
+                model: p['MODELS'],
+                price: p['DP Price'],
+                product: p
+            }));
+            if (textSliderProducts.length === 0) {
+                const textSlider = document.getElementById('textSlider');
+                if (textSlider) textSlider.innerText = 'कोई उत्पाद नहीं';
+                return;
+            }
+            textSliderIndex = 0;
+            updateTextSlider();
+            if (textSliderInterval) clearInterval(textSliderInterval);
+            textSliderInterval = setInterval(() => {
+                textSliderIndex = (textSliderIndex + 1) % textSliderProducts.length;
+                updateTextSlider();
+            }, 3000);
+        }
+        function updateTextSlider() {
+            const p = textSliderProducts[textSliderIndex];
+            const textSlider = document.getElementById('textSlider');
+            if (textSlider) textSlider.innerHTML = `${p.company} - ${p.model} - ₹${p.price}`;
+        }
+        function handleTextSliderClick() {
+            if (textSliderProducts.length > 0) showProductDetail(textSliderProducts[textSliderIndex].product);
+        }
+
+        function showProductDetail(product) {
+            const detailDiv = document.getElementById('productDetailContent');
+            let detailHtml = `<div onclick="showImagePopup('${product['image link']}')"><img src="${product['image link']}" alt="${product.MODELS}" style="cursor: pointer;" onerror="this.src='https://via.placeholder.com/200?text=No+Image'"></div>`;
+            for (let key in product) {
+                if (key !== 'image link' && product[key]) {
+                    detailHtml += `<div class="detail-row"><span class="detail-label">${key}:</span><span class="detail-value">${product[key]}</span></div>`;
+                }
+            }
+            detailHtml += `<button class="btn" style="background:#00c853; margin-top:15px;" onclick="buyProduct('${product['DP Price']}', '${product.MODELS}')">खरीदें</button>`;
+            detailHtml += `<button class="btn" style="background:#333; margin-top:10px;" onclick="closeOverlay('productDetailPopup')">बंद करें</button>`;
+            detailDiv.innerHTML = detailHtml;
+            document.getElementById('productDetailPopup').style.display = 'flex';
+        }
+
+        function showImagePopup(imageUrl) {
+            document.getElementById('fullImage').src = imageUrl;
+            document.getElementById('imagePopup').style.display = 'flex';
+        }
+        function closeImagePopup() { document.getElementById('imagePopup').style.display = 'none'; }
+
+        function buyProduct(price, model) {
+            closeOverlay('productDetailPopup');
+            let myUpiId = "vyapar.176971501543@hdfcbank";
+            let myName = "PM%20BAZAR";
+            let upiLink = `upi://pay?pa=${myUpiId}&pn=${myName}&am=${price}&cu=INR&tn=MOBILE_${model.replace(/\s/g, '_')}`;
+            let qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiLink)}`;
+            document.getElementById('paymentQrContent').innerHTML = `
+                <div style="background:white; padding:20px; border-radius:15px; color:black; text-align:center;">
+                    <img src="${qrUrl}" style="width:200px; height:200px; margin-bottom:10px;">
+                    <b style="font-size:22px;">Pay ₹${price}</b>
+                    <p style="color:red; margin:10px 0;">⚠️ भुगतान के बाद ही बटन दबाएं</p>
+                    <button class="btn" style="background:#28a745; color:white;" onclick="submitMobileOrder('${price}', '${model}')">✅ मैंने भुगतान कर दिया</button>
+                    <button class="btn" style="background:#333; color:white; margin-top:10px;" onclick="closeOverlay('paymentQrPopup')">रद्द करें</button>
+                </div>
+            `;
+            document.getElementById('paymentQrPopup').style.display = 'flex';
+        }
+
+        async function submitMobileOrder(price, model) {
+            const payload = {
+                key: SECRET_KEY, sheet: "Order History", data: {
+                    "Timestamp": new Date().toLocaleString(),
+                    "Type": "MOBILE",
+                    "User ID": currentUser['Mobile ( User ID )'],
+                    "Order ID": "PMB" + Math.floor(Math.random() * 900000),
+                    "Order Status": "Pending",
+                    "Price": price,
+                    "Details": model
+                }
+            };
+            await fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(payload) });
+            alert("आपका ऑर्डर सबमिट हो गया है! जल्द ही अपडेट होगा।");
+            closeOverlay('paymentQrPopup');
+            loadOrders();
+        }
+
+        // ========== नए कूपन फंक्शन (स्क्रैच कार्ड) ==========
+        function setupScratchCard(index, rewardText) {
+            const canvas = document.getElementById(`can${index}`);
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d', { alpha: true });
+            const box = document.getElementById(`box${index}`);
+            const textLayer = document.getElementById(`text${index}`);
+            if (!box || !textLayer) return;
+
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width || 160;
+            canvas.height = rect.height || 110;
+
+            ctx.fillStyle = '#b0b0b0';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#444';
+            ctx.font = 'bold 16px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('SCRATCH HERE', canvas.width / 2, canvas.height / 2);
+
+            let isDrawing = false;
+
+            function getPos(e) {
+                const rect = canvas.getBoundingClientRect();
+                const scaleX = canvas.width / rect.width;
+                const scaleY = canvas.height / rect.height;
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                return {
+                    x: (clientX - rect.left) * scaleX,
+                    y: (clientY - rect.top) * scaleY
+                };
+            }
+
+            function scratchStart(e) {
+                if (gameLocked && !box.classList.contains('focused')) return;
+                isDrawing = true;
+                scratch(e);
+            }
+
+            function scratch(e) {
+                if (!isDrawing) return;
+                e.preventDefault();
+
+                if (!gameLocked) {
+                    gameLocked = true;
+                    currentScratchedIndex = index;
+                    hideOthers(index);
+                    const win = rewardText;
+                    textLayer.innerHTML = `<small>बधाई हो!</small><br>${win}`;
+                    selectedCoupon = win;
+
+                    const key = `couponScratch_${currentUser['Mobile ( User ID )']}`;
+                    localStorage.setItem(key, Date.now().toString());
+                    couponCooldown = 60 * 60 * 1000;
+                    startCouponTimer();
+
+                    const claimBtn = document.getElementById('claimBtn');
+                    if (claimBtn) claimBtn.style.display = 'inline-block';
+                }
+
+                const pos = getPos(e);
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.beginPath();
+                ctx.arc(pos.x, pos.y, 18, 0, Math.PI * 2);
+                ctx.fill();
+
+                if (navigator.vibrate) navigator.vibrate(5);
+            }
+
+            canvas.addEventListener('mousedown', scratchStart);
+            canvas.addEventListener('touchstart', scratchStart);
+            window.addEventListener('mousemove', scratch);
+            window.addEventListener('touchmove', scratch, { passive: false });
+            window.addEventListener('mouseup', () => isDrawing = false);
+            window.addEventListener('touchend', () => isDrawing = false);
+
+            if (couponCooldown > 0) {
+                canvas.style.pointerEvents = 'none';
+                canvas.style.opacity = '0.5';
+            }
+        }
+
+        function hideOthers(currentId) {
+            for (let i = 0; i < 4; i++) {
+                const box = document.getElementById('box' + i);
+                if (box) {
+                    if (i !== currentId) {
+                        box.classList.add('hidden');
+                    } else {
+                        box.classList.add('focused');
+                    }
+                }
+            }
+            document.getElementById('couponStatus').innerText = "पूरा खुरचें!";
+        }
+
+        function openCouponModal() {
+            if (!currentUser) {
+                alert('पहले लॉगिन करें');
+                return;
+            }
+            const key = `couponScratch_${currentUser['Mobile ( User ID )']}`;
+            const lastScratch = localStorage.getItem(key);
+            const now = Date.now();
+            const oneHour = 60 * 60 * 1000;
+
+            if (lastScratch) {
+                const last = parseInt(lastScratch);
+                const elapsed = now - last;
+                if (elapsed < oneHour) {
+                    couponCooldown = oneHour - elapsed;
+                    startCouponTimer();
+                    gameLocked = true;
+                } else {
+                    localStorage.removeItem(key);
+                    couponCooldown = 0;
+                    gameLocked = false;
+                }
+            } else {
+                couponCooldown = 0;
+                gameLocked = false;
+            }
+
+            displayCoupons();
+            const claimBtn = document.getElementById('claimBtn');
+            if (claimBtn) claimBtn.style.display = 'none';
+            document.getElementById('couponStatus').innerText = '';
+            selectedCoupon = null;
+            document.getElementById('couponModal').style.display = 'flex';
+        }
+
+        function closeCouponModal() {
+            document.getElementById('couponModal').style.display = 'none';
+        }
+
+        function startCouponTimer() {
+            if (couponTimerInterval) clearInterval(couponTimerInterval);
+            const timerDiv = document.getElementById('couponTimer');
+            if (!timerDiv) return;
+            couponTimerInterval = setInterval(() => {
+                if (couponCooldown <= 0) {
+                    clearInterval(couponTimerInterval);
+                    timerDiv.innerText = '';
+                } else {
+                    const hours = Math.floor(couponCooldown / (60 * 60 * 1000));
+                    const minutes = Math.floor((couponCooldown % (60 * 60 * 1000)) / (60 * 1000));
+                    const seconds = Math.floor((couponCooldown % (60 * 1000)) / 1000);
+                    timerDiv.innerText = `अगला प्रयास: ${hours} घंटे ${minutes} मिनट ${seconds} सेकंड में`;
+                    couponCooldown -= 1000;
+                }
+            }, 1000);
+        }
+
+        function displayCoupons() {
+            const grid = document.getElementById('couponGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            if (couponValues.length === 0) couponValues = ["₹10 छूट", "₹20 छूट", "30% छूट", "₹50 छूट"];
+
+            for (let i = 0; i < 4; i++) {
+                const val = couponValues[i] || "₹10 छूट";
+                const boxDiv = document.createElement('div');
+                boxDiv.className = 'scratch-box';
+                boxDiv.id = `box${i}`;
+
+                const rewardDiv = document.createElement('div');
+                rewardDiv.className = 'reward-layer';
+                rewardDiv.id = `text${i}`;
+
+                const canvas = document.createElement('canvas');
+                canvas.id = `can${i}`;
+
+                boxDiv.appendChild(rewardDiv);
+                boxDiv.appendChild(canvas);
+                grid.appendChild(boxDiv);
+            }
+
+            for (let i = 0; i < 4; i++) {
+                setupScratchCard(i, couponValues[i]);
+            }
+
+            if (couponCooldown > 0) {
+                for (let i = 0; i < 4; i++) {
+                    const canvas = document.getElementById(`can${i}`);
+                    if (canvas) {
+                        canvas.style.pointerEvents = 'none';
+                        canvas.style.opacity = '0.5';
+                    }
+                }
+            }
+        }
+
+        // ========== कूपन पेमेंट का नया फंक्शन ==========
+        function proceedCouponPayment() {
+            if (!selectedCoupon) return;
+            const amount = extractNumber(selectedCoupon) || 0;
+            if (amount <= 0) {
+                alert('अमान्य राशि');
+                return;
+            }
+            closeCouponModal(); // कूपन मोडल बंद करें
+            showCouponQR(amount, selectedCoupon);
+        }
+
+        function extractNumber(text) {
+            const match = text.match(/\d+/);
+            return match ? parseInt(match[0]) : 0;
+        }
+
+        function showCouponQR(amount, couponText) {
+            let myUpiId = "vyapar.176971501543@hdfcbank";
+            let myName = "PM%20BAZAR";
+            let upiLink = `upi://pay?pa=${myUpiId}&pn=${myName}&am=${amount}&cu=INR&tn=COUPON_${couponText.replace(/\s/g, '_')}`;
+            let qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiLink)}`;
+
+            document.getElementById('paymentQrContent').innerHTML = `
+                <div style="background:white; padding:20px; border-radius:15px; color:black; text-align:center;">
+                    <img src="${qrUrl}" style="width:200px; height:200px; margin-bottom:10px;">
+                    <b style="font-size:22px;">Pay ₹${amount}</b>
+                    <p style="color:red; margin:10px 0;">⚠️ भुगतान के बाद ही बटन दबाएं</p>
+                    <button class="btn" style="background:#28a745; color:white;" onclick="submitCouponOrder('${amount}', '${couponText}')">✅ मैंने भुगतान कर दिया</button>
+                    <button class="btn" style="background:#333; color:white; margin-top:10px;" onclick="closeOverlay('paymentQrPopup')">रद्द करें</button>
+                </div>
+            `;
+            document.getElementById('paymentQrPopup').style.display = 'flex';
+        }
+
+        async function submitCouponOrder(amount, couponText) {
+            const payload = {
+                key: SECRET_KEY, sheet: "Order History", data: {
+                    "Timestamp": new Date().toLocaleString(),
+                    "Type": "COUPON",
+                    "User ID": currentUser['Mobile ( User ID )'],
+                    "Order ID": "PMB" + Math.floor(Math.random() * 900000),
+                    "Order Status": "Pending",
+                    "Price": amount,
+                    "Details": couponText
+                }
+            };
+            await fetch(API_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(payload) });
+            alert("आपका ऑर्डर सबमिट हो गया है! जल्द ही अपडेट होगा।");
+            closeOverlay('paymentQrPopup');
+            loadOrders();
+        }
+
+        // ---------- TAB SWITCHING ----------
+        function switchTab(id, el) {
+            document.querySelectorAll(".page-section").forEach(p => p.classList.remove("active-section"));
+            document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
+            document.getElementById(id).classList.add("active-section");
+            el.classList.add("active");
+            if (id === 'homePage') {
+                document.getElementById('mobileFilterBar').style.display = 'none';
+                document.getElementById('homeContent').style.display = 'block';
+                displayHomeProducts();
+            }
+            if (id === 'historyPage') loadOrders();
+        }
+
+        function closeOverlay(id) {
+            const el = document.getElementById(id);
+            if (el) el.style.display = "none";
+        }
+        function logout() { localStorage.clear(); location.reload(); }
+
+        function startSlider() {
+            let i = 0;
+            const track = document.getElementById("advTrack");
+            if (!track || track.children.length === 0) return;
+            setInterval(() => {
+                i = (i + 1) % track.children.length;
+                track.style.transform = `translateX(-${i * 100}%)`;
+            }, 4000);
+        }
+
+        function showForgotPin() { alert(`अपना पिन भूल गए? कृपया एडमिन से संपर्क करें: ${ADMIN_PHONE}`); }
+
+        window.onload = async () => {
+            logDebug('Window loaded');
+            let s = localStorage.getItem("pmUser");
+            if (s) {
+                currentUser = JSON.parse(s);
+                const user = await checkUserStatus(currentUser['Mobile ( User ID )']);
+                if (user) {
+                    currentUser = user;
+                    if (!currentUser.Name) currentUser = JSON.parse(s);
+                    loginSuccess();
+                } else {
+                    loginSuccess();
+                }
+            } else {
+                document.getElementById('auth-section').style.display = 'flex';
+                document.getElementById('main-website').style.display = 'none';
+            }
+            loadAllUsers();
+        };
+    </script>
+</body>
+
+</html>
